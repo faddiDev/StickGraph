@@ -1,0 +1,212 @@
+<html>
+	<head>
+		<title>Stick Graph</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#WAGH{
+				position: relative;
+				top: 30px;
+				width: 500px;
+				height: auto;
+				margin: 0 auto;
+			}
+			#body{
+				width: 427px;
+				height: 300px;
+				border-left: 1px solid black;
+				border-bottom: 1px solid black;
+				float: left;
+			}
+			#body span{
+				position: absolute;
+				bottom: 20px;
+				left: 20px;
+			}
+			#y{
+				width: 26px;
+				height: 300px;
+				float: left;
+				display: block;
+			}
+			.yAxis {
+				position: relative;
+				margin: -10px;
+			}
+			#x{
+				width: 605px;
+				height: 20px;
+				padding-left: 16px;
+			}
+			.xAxis {
+				width: 1005px;
+				display: inline;
+			}
+			#body .stick{
+				position: absolute;
+				width: 25px;
+				bottom: 21px;
+				border: 1px solid black;
+			}
+			#body .sticks{
+				position: absolute;
+				width: 25px;
+				bottom: 21px;
+				border: 1px solid black;
+			}
+			#inp{
+				margin-bottom: 30px;
+			}
+			#xInp{
+				position: relative;
+				top: 40px;
+				width: 300px;
+				margin: auto;
+			}
+			.clear{
+				clear: both;
+				float: none;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="WAGH">
+			<div id="inp">
+				Max. Value <input type="text" id="mval" size="7">&nbsp;<button id="okBtn">OK</button>
+				&nbsp;&nbsp;&nbsp;
+				<span style="width:10xp;height:10px;background-color:blue;padding-left:15px;"></span> = Total Sampoerna
+				&nbsp;&nbsp;&nbsp;
+				<span style="width:10xp;height:10px;background-color:red;padding-left:15px;"></span> = Total Sampoerna
+			</div>
+			<div id="y">
+				<div class="yAxis"></div>
+				<div class="yAxis"></div>
+				<div class="yAxis"></div>
+				<div class="yAxis"></div>
+				<div class="yAxis"></div>
+			</div>
+			<div id="body">
+				<div class="stick"></div>
+				<div class="sticks"></div>
+				<div class="stick"></div>
+				<div class="sticks"></div>
+				<div class="stick"></div>
+				<div class="sticks"></div>
+				<div class="stick"></div>
+				<div class="sticks"></div>
+				<div class="stick"></div>
+				<div class="sticks"></div>
+				<div class="stick"></div>
+				<div class="sticks"></div>
+				<div class="stick"></div>
+				<div class="sticks"></div>
+			</div>
+			<div class="clear"></div>
+			<div id="x">
+				<div class="xAxis"></div>
+				<div class="xAxis"></div>
+				<div class="xAxis"></div>
+				<div class="xAxis"></div>
+				<div class="xAxis"></div>
+				<div class="xAxis"></div>
+				<div class="xAxis"></div>
+				<div class="xAxis"></div>
+			</div>
+		</div>
+		<div id="xInp">
+			05 Mei : <input type="text" class="X1" size="6">&nbsp;<input type="text" class="X2" size="6">&nbsp;<button id="btn1" class="buttonOK" onclick="clickOK(0);">OK</button><br /><br />
+			06 Mei : <input type="text" class="X1" size="6">&nbsp;<input type="text" class="X2" size="6">&nbsp;<button id="btn2" class="buttonOK" onclick="clickOK(1);">OK</button><br /><br />
+			07 Mei : <input type="text" class="X1" size="6">&nbsp;<input type="text" class="X2" size="6">&nbsp;<button id="btn3" class="buttonOK" onclick="clickOK(2);">OK</button><br /><br />
+			08 Mei : <input type="text" class="X1" size="6">&nbsp;<input type="text" class="X2" size="6">&nbsp;<button id="btn4" class="buttonOK" onclick="clickOK(3);">OK</button><br /><br />
+			09 Mei : <input type="text" class="X1" size="6">&nbsp;<input type="text" class="X2" size="6">&nbsp;<button id="btn5" class="buttonOK" onclick="clickOK(4);">OK</button><br /><br />
+			10 Mei : <input type="text" class="X1" size="6">&nbsp;<input type="text" class="X2" size="6">&nbsp;<button id="btn6" class="buttonOK" onclick="clickOK(5);">OK</button><br /><br />
+			11 Mei : <input type="text" class="X1" size="6">&nbsp;<input type="text" class="X2" size="6">&nbsp;<button id="btn7" class="buttonOK" onclick="clickOK(6);">OK</button><br /><br />
+		</div>
+		
+		<script type="text/javascript">
+			var j = 45;
+			var k = 73;
+			var stickLength = document.getElementsByClassName('stick').length;
+			for(var i=0;i<stickLength;i++) {
+				document.getElementsByClassName('stick')[i].style.display = "none";
+				document.getElementsByClassName('stick')[i].style.left = j;
+				document.getElementsByClassName('stick')[i].style.background = "blue";
+				document.getElementsByClassName('sticks')[i].style.display = "none";
+				document.getElementsByClassName('sticks')[i].style.left = k;
+				document.getElementsByClassName('sticks')[i].style.background = "red";
+				j+=59;
+				k+=59;
+				document.getElementsByClassName("X1")[i].disabled = true;
+				document.getElementsByClassName("X2")[i].disabled = true;
+				document.getElementsByClassName("buttonOK")[i].disabled = true;
+			}
+			
+			document.getElementById("okBtn").onclick = function() {
+				var mval = document.getElementById("mval").value;
+				if(mval > 1000000) {
+					alert("Maksimum value must not exceed 1 Millions");
+				} else if(mval == "" || mval == "0") {
+					alert("Value must be greater than 0");
+				} else {
+					var x = parseInt(mval) * 0.2;
+					var x1 = x + x;
+					var x2 = x1 + x;
+					var x3 = x2 + x;
+					var x4 = x3 + x;
+					var yAxis = 0;
+					var px = 0;
+					while(yAxis < 5) {
+						document.getElementsByClassName("yAxis")[yAxis].style.top = parseInt(px) + "px";
+						document.getElementsByClassName("yAxis")[yAxis].innerHTML = x4 + "-";
+						yAxis++;
+						x4 -= x;
+						px += 51;
+					}
+					document.getElementsByClassName("xAxis")[0].innerHTML = "0";
+					var xAxis = 1;
+					var xAxisLength = document.getElementsByClassName("xAxis").length;
+					y = 5;
+					while(xAxis < xAxisLength) {
+						document.getElementsByClassName("xAxis")[xAxis].style.padding = "0px 0px 0px 16px";
+						document.getElementsByClassName("xAxis")[xAxis].innerHTML = y + " Mei";
+						xAxis++;
+						y++;
+					}
+					var graphLength = document.getElementsByClassName("stick").length;
+					for(var i=0;i<graphLength;i++) {
+						document.getElementsByClassName("stick")[i].style.display = "block";
+						document.getElementsByClassName("sticks")[i].style.display = "block";
+						document.getElementsByClassName("X1")[i].disabled = false;
+						document.getElementsByClassName("X2")[i].disabled = false;
+						document.getElementsByClassName("buttonOK")[i].disabled = false;
+					}
+				}
+			};
+			
+			function clickOK(j) {
+				var mval = document.getElementById("mval").value;
+				var xls = document.getElementsByClassName("X1")[j].value;
+				var xxls = document.getElementsByClassName("X2")[j].value;
+				if(xls > parseInt(mval) || xxls > parseInt(mval)) {
+					alert("Data must not exceed " + mval);
+				} else {
+					xls = (10 / (parseInt(mval)/xls)) * (300/10);
+					document.getElementsByClassName("stick")[j].style.height = xls;
+					document.getElementsByClassName("stick")[j].innerHTML = " " + document.getElementsByClassName("X1")[j].value;
+					document.getElementsByClassName("stick")[j].style.fontSize = 11;
+					document.getElementsByClassName("stick")[j].style.color = "white";
+					xxls = (10 / (parseInt(mval)/xxls)) * (300/10);
+					document.getElementsByClassName("sticks")[j].style.height = xxls;
+					document.getElementsByClassName("sticks")[j].innerHTML = " " + document.getElementsByClassName("X2")[j].value;
+					document.getElementsByClassName("sticks")[j].style.fontSize = 11;
+					document.getElementsByClassName("sticks")[j].style.color = "white";
+				}
+			}
+		</script>
+		
+	</body>
+
+</html>
