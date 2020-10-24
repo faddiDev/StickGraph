@@ -10,4 +10,6 @@ Stick Graph HTML Using Javascript
   <li>Pick your favorite browser</li>
 </ul>
 
+Check my video how to create from 0 to hero code : <a href="https://youtu.be/QJYxYbCnnCc">Stick Graph HTML on Youtube</a>
+
 Faddi Susanto&copy;2020
